@@ -1,0 +1,43 @@
+info:
+  component: Edge Server
+  
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+zuul:
+  prefix: /api
+  routes:
+    campaign:
+      path: /orderstatus/**
+      serviceId: orderstatus-service
+
+ribbon:
+  eureka:
+    enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://10.130.10.185:8761/eureka/
+    #registerWithEureka: false
+      
+server:
+  port: 8765
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG
+
+security:
+  basic:
+    enable: false
+
+management:
+  security:
+    enabled: false

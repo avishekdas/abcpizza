@@ -1,0 +1,9 @@
+#notice the use of profiles one for localhost, one for docker
+server:
+  port: 8761
+  
+eureka:
+  client:  # Not a client, don't register with yourself
+    registerWithEureka: false
+    fetchRegistry: false
+

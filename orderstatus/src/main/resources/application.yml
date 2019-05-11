@@ -1,0 +1,66 @@
+server:
+  port: 9292
+
+spring:
+  application:
+    name: orderstatus-service
+  logging:
+    pattern:
+      console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr([${springAppName:-},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}]){yellow} %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+    level:
+      org.springframework: WARN
+      org.hibernate: WARN
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/abcpizzaorderservice
+    username: newuser
+    password: password
+    testWhileIdle: true
+    validationQuery: SELECT 1
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    time-zone: UTC
+  #boot:
+    #admin:
+      #url: http://10.130.10.185:2222
+      #url: http://10.200.2.80:2222
+
+  #kafka:
+    #bootstrap-servers: localhost:9092
+    #topic: order-status
+
+management:
+  security:
+    enabled: false
+
+logging:
+  level:
+    com.abc.service.order: DEBUG
+
+app:
+  jwtSecret: JWTSuperSecretKey
+  jwtExpirationInMs: 604800000
+
+#eureka:
+  #client:
+    #serviceUrl:
+      #defaultZone: http://10.130.10.185:8761/eureka/
+      #defaultZone: http://10.200.2.80:8761/eureka/
+  #instance:
+    #leaseRenewalIntervalInSeconds: 5   # DO NOT DO THIS IN PRODUCTION
+    #preferIpAddress: true
+    #leaseRenewalIntervalInSeconds: 1
+    #leaseExpirationDurationInSeconds: 2
+
+#ribbon:
+  #eureka:
+    #enabled: true
